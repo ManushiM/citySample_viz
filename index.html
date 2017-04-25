@@ -1,44 +1,221 @@
- <html>
+<html>
     <head>
         <title>City Sample</title>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
    integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
    crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
    integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
    crossorigin=""></script>
-        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-        <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     </head>
-     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-     <style>
-        #mapid {
-            width: 800px;
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+
+        a.link {
+            float: right;
+        }
+
+        .sentiment {
+             margin: auto;
+            text-align: center;
+        }
+
+        #card {
+            width: 400px;
             height: 500px;
-         }
-         h1 {
-             text-align: center;
-         }
-     </style>
-     <body id="content">
-         <div>
+        }
+
+        #map {
+            width: 850px;
+            height: 500px;
+            top: -480;
+            bottom: 600;
+            left: 200;
+            margin: auto;
+            text-align: center;
+        }
+
+        path {
+            fill-opacity: 0;
+            stroke-opacity: 0;
+        }
+
+        path:hover {
+            fill: brown;
+            fill-opacity: .7;
+        }
+
+        .info {
+            padding: 6px 8px;
+            font: Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+
+        .info h4 {
+            margin: 0 0 5px;
+        }
+    </style>
+    <body id="content">
+        <div>
             <h1>City Sample</h1>
-         </div>
-         <div id="mapid"></div>
-         <script>
-            var mymap = new L.Map("mapid", {center: [33.642063, -13.535156], zoom: 2});
-            L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+        </div>
+        <div id="card">
+         <svg width="400" height="500">
+             <g id="keyword"></g>
+             <g id="details"></g>  
+        </svg>
+        </div>
+        <div id="map"></div>
+    </body>
+    <script>
+
+        var div2 = d3.select("#keyword");
+        var div3 = d3.select("#details");
+
+        //For the details+keywords card on page landing
+        var keyPhrases = div3.append("rect")
+                             .attr("x", 15)
+                             .attr("y", 35)
+                             .attr("width", 275)
+                             .attr("height", 900)
+                             .attr("fill", "white");
+
+
+        var keywordText = div2.append('text').text('Details for City')
+                              .attr('x', 40)
+                              .attr('y', 30)
+                              .attr('font-weight', 800)
+                              .attr('fill', 'black');
+
+
+
+
+    </script>
+
+    <script>
+           //Map work 
+
+        var map = new L.Map("map", {center: [33.642063, -13.535156], zoom: 2});
+        L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; CartoDB',
             maxZoom: 8,
-        }).addTo(mymap)
-             
-            var cities = 'https://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
+        }).addTo(map)
+        
+        var cities = 'https://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
             
-            cartodb.createLayer(mymap, cities)
-                .addTo(mymap)
+            cartodb.createLayer(map, cities)
+                .addTo(map)
                 .on('error', function(err) {
                     alert("some error occurred: " + err);
             });
-         </script>
-     </body>
- </html>
+
+         //Create informational comment
+        var info = L.control("topright");
+        info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+        info.update = function (props) {
+        this._div.innerHTML = '<h4>Click on the cities for more information</h4>'
+    };
+
+        info.addTo(map);
+
+        var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+        g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+
+    //Load the countries data
+    d3.json("city_sample_convert.geojson", function(error, collection) {
+      if (error) throw error;
+
+      var transform = d3.geo.transform({point: projectPoint}),
+          path = d3.geo.path().projection(transform);
+
+      var feature = g.selectAll("path")
+          .data(collection.features)
+          .enter().append("path")
+          .on("click", function(d, i) {
+              
+              var cardTop = 20;
+                        
+                        //Setting up the details+keywords card
+                        d3.select("#details").append("rect")
+                             .attr("x", cardTop)
+                             .attr("y", 65)
+                             .attr("width", 275)
+                             .attr("height", 400)
+                             .attr("fill", "white");
+
+                        d3.select("#details").append('text').text(d.properties["City"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 80)
+                                          .attr('font-weight', 900)
+                                          .attr('text-decoration', 'underline')
+                                          .attr('fill', 'black');
+
+                        d3.select("#details").append('text').text("Country : " + d.properties["Country"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 100)
+                                          .attr('fill', 'black');
+
+                        d3.select("#details").append('text').text("Temperature : " + d.properties["Temperature"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 120)
+                                          .attr('fill', 'black');
+
+                       d3.select("#details").append('text').text("Major Religion : " + d.properties["major religion"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 140)
+                                          .attr('fill', 'black');
+                       
+                       d3.select("#details").append('text').text("Population : " + d.properties["Population"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 160)
+                                          .attr('fill', 'black');
+                       
+                       /*d3.select("#details").append('text').text("Response : " + d.properties["Response"])
+                                          .attr("x", cardTop+15)
+                                          .attr("y", 180)
+                                          .attr('fill', 'black')
+                                          .attr('word-wrap', 'break-word');*/
+
+                                });
+
+      map.on("viewreset", reset);
+      reset();
+
+      // Reposition the SVG to cover the features.
+      function reset() {
+        var bounds = path.bounds(collection),
+            topLeft = bounds[0],
+            bottomRight = bounds[1];
+
+        svg .attr("width", bottomRight[0] - topLeft[0])
+            .attr("height", bottomRight[1] - topLeft[1])
+            .style("left", topLeft[0] + "px")
+            .style("top", topLeft[1] + "px");
+
+        g   .attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+        feature.attr("d", path);
+      }
+
+      // Use Leaflet to implement a D3 geometric transformation.
+      function projectPoint(x, y) {
+        var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+      }
+    });
+
+</script>
+</html>

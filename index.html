@@ -1,7 +1,7 @@
  <html>
     <head>
         <title>City Sample</title>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
    integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
    crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
@@ -32,7 +32,7 @@
             maxZoom: 8,
         }).addTo(mymap)
              
-            var cities = 'http://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
+            var cities = 'https://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
             
             cartodb.createLayer(mymap, cities)
                 .addTo(mymap)

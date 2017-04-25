@@ -1,0 +1,44 @@
+ <html>
+    <head>
+        <title>City Sample</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
+   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+   crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"
+   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+   crossorigin=""></script>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    </head>
+     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+     <style>
+        #mapid {
+            width: 800px;
+            height: 500px;
+         }
+         h1 {
+             text-align: center;
+         }
+     </style>
+     <body id="content">
+         <div>
+            <h1>City Sample</h1>
+         </div>
+         <div id="mapid"></div>
+         <script>
+            var mymap = new L.Map("mapid", {center: [33.642063, -13.535156], zoom: 2});
+            L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; CartoDB',
+            maxZoom: 8,
+        }).addTo(mymap)
+             
+            var cities = 'https://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
+            
+            cartodb.createLayer(mymap, cities)
+                .addTo(mymap)
+                .on('error', function(err) {
+                    alert("some error occurred: " + err);
+            });
+         </script>
+     </body>
+ </html>

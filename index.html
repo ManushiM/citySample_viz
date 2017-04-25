@@ -136,7 +136,7 @@
 
 
     //Load the countries data
-    d3.json("city_sample_convert.geojson", function(error, collection) {
+    d3.json("https://raw.githubusercontent.com/ManushiM/citySample_viz/master/city_sample_convert.geojson", function(error, collection) {
       if (error) throw error;
 
       var transform = d3.geo.transform({point: projectPoint}),

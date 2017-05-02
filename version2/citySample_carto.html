@@ -1,85 +1,111 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CartoTemplate | CartoDB</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-  
-  <style>
-   /* html, body, #map {
-      height: 100%;
-      padding: 0;
-      margin: 0;
-    }*/
-      
-     h1 {
+  <head>
+    <title>City Sample</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+    <style>
+        h1 {
+            font-family: 'Open Sans', serif;
             text-align: center;
         }
-      
-     #map {
-            width: 700px;
-            height: 400px;
-           /* margin: auto;*/
-            float: left;
-            text-align: left;
+        #country,#temp, #religion, #pop {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: 'Open Sans', serif;
+            font-size: 20px;
         }
-      #details {
-          padding: 20px;
-          text-align: center;
-          font-weight: 900;
-          font-size: 300;
-          text-decoration: underline;
-          /*margin: auto;*/
-          float: left;
-              
-      }
-      #response {
-          padding: 20px;
-          /*text-align: left;*/
-          font-weight: 800;
-          text-decoration: underline;
-          /*margin: auto;*/
-              
-      }
-    /*.cartodb-logo{
-      display:none!important;
-    }*/
-  </style>
-
-  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-  <!-- 
-  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-  -->
-</head>
+        #response {
+            font-family: 'Open Sans', serif;
+            font-size: 20px;
+        }
+    </style>
+    <style>
+        #map {
+            width: 600px;
+            height: 600px;
+            padding: 0;
+            margin: 0;
+            float: left;
+        }
+        #report .city{
+            padding: 5px;
+        }
+        #report {
+            float: left;
+            padding-left: 18px
+        }
+        #response {
+            float: left;
+            padding-left: 18px
+        }
+        h3{
+            font-weight: 900;
+            text-decoration: underline; 
+            font-size: 24px;
+            font-family: 'Open Sans', serif;
+        }
+    </style>
+  <script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/3611F27F-4FA1-6046-8BD5-1C021DD42595/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="http://gc.kis.v2.scr.kaspersky-labs.com/59524DD120C1-5DB8-6406-1AF4-F72F1163/abn/main.css"/></head>
   <body>
-    <div>
-            <h1>City Sample</h1>
+    <h1>City Sample</h1>
+    <div id="content">
+        <div id="map"></div>
+        <div id="report">
+            <h3 class="city"></h3>
+            <div id="country" class="country"></div>
+            <div id="temp" class="temp"></div>
+            <div id="religion" class="religion"></div>
+            <div id="pop" class="pop"></div>
+            <div id="response" class="response"></div>
+        </div>
     </div>
-    <div id="map"></div>
-    <div id="details">City Details</div>
-    <div id="response">Response</div>
-    <!-- include cartodb.js library -->
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-
     <script>
-        var url = 'http://manushi-nyu.cartodb.com/api/v2/viz/b48f8b3e-291c-11e7-aca0-0e98b61680bf/viz.json';
-        
-        map= new L.Map('map', {center: [33.642063, -13.535156], zoom: 2});
-  
-        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 
-        {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-        }).addTo(map);
-        cartodb.createLayer(map, url,{
-    	//options
-        refreshTime:3500
-        }).addTo(map)
-        .done(function(layer){
-      //do stuff
-    });
-  
-  </script>
+    // get the viz.json url from the CartoDB Editor
+    // - click on visualize
+    // - create new visualization
+    // - make visualization public
+    // - click on publish
+    // - go to API tab
 
-</body>
+    window.onload = function() {
+      cartodb.createVis('map', 'https://vr00n.carto.com/api/v2/viz/da1d92b2-2ed8-11e7-a397-0ecd1babdde5/viz.json')
+      
+        .done(function(vis, layers){
+            var cities = layers[1].getSubLayer(0);
+
+
+            cities.setSQL("SELECT * from sample");
+
+            cities.setInteraction(true);
+
+            cities.setInteractivity("city, country, temp_text, temperature, major_religion, pop_text, population, response");
+
+            cities.on('featureClick', function(e, latlng, pos, data, subLayerIndex) {
+                $('.city').html(data.city);
+                $('.country').html("Country: "+data.country);
+                $('.temp').html("Temperature: "+"<img src="+data.temperature+ " style='width:42px;height:42px;'/></a>"+" "+"("+data.temp_text+")");
+                $('.religion').html("<br>"+"Major Religion: "+data.major_religion+"</br>");
+                $('.pop').html("Population: "+"<img src="+data.population+ " style='width:42px;height:42px;'/></a>"+" "+"("+data.pop_text+")");
+                
+                $('.response').html("<br><td width='600px' style='word-wrap:break-word;'><div style='width:600px;overflow:auto'>"+"Survey Response: "+data.response+"</div></td></br>");
+
+                vis.getNativeMap().setView([33.642063, -13.535156], 2);
+
+            });
+        })
+    }
+    </script>
+  
+
+  </body>
 </html>

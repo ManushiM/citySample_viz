@@ -1,0 +1,93 @@
+<html>
+<head>
+  <title>City Sample</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <style>
+      
+      h1 {
+            font-family: 'avenir';
+            text-align: center;
+        }
+        #map {
+            width: 800px;
+            height: 600px;
+            padding: 0;
+            margin: 0;
+            float: left;
+        }
+       #report {
+            float: left;
+            padding-left: 18px
+        }
+        h3{
+            font-weight: 900;
+            text-decoration: underline; 
+            font-size: 24px;
+            font-family: 'avenir';
+        }
+      #country,#temp, #religion, #pop {
+            padding: 0;
+            margin: 0;
+            font-family: 'avenir';
+            font-size: 20px;
+        }
+      #response {
+            font-family: 'avenir';
+            font-size: 20px;
+        }
+  </style>
+</head>
+<body>
+  <h1>City Sample</h1>
+  <div id="map"></div>
+    <div id="report">
+            <h3 id= "city" class="city"></h3>
+            <div id="country" class="country"></div>
+            <div id="temp" class="temp"></div>
+            <div id="religion" class="religion"></div>
+            <div id="pop" class="pop"></div>
+            <div id="response" class="response"></div>
+    </div>
+  <script>
+
+  // initialize the map
+  var map = L.map('map').setView([33.642063, -13.535156], 2);
+
+  // load a tile layer
+  L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+    {
+      attribution: '<a href="http://cartodb.com/attributions">CartoDB</a>',
+      maxZoom: 9,
+      minZoom: 2
+    }).addTo(map);
+      
+     $.getJSON("sample.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data,{
+        
+    pointToLayer: function(feature,latlng){
+        var marker = L.marker(latlng);
+        marker.bindPopup(feature.properties.City);
+        return marker;
+    },
+        
+    onEachFeature: function(feature, layer) {
+        layer.on({
+    click: function populate() {
+        document.getElementById('city').innerHTML = feature.properties.City;
+        document.getElementById('country').innerHTML = "Country: " + feature.properties.Country;
+        document.getElementById('temp').innerHTML = "Temperature: " + "<img src="+feature.properties.Temperature+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.temp_text+")";
+        document.getElementById('religion').innerHTML = "<br>"+"Major Religion: "+feature.properties["major religion"]+"</br>"
+        document.getElementById('pop').innerHTML = "Population: " + "<img src="+feature.properties.Population+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.pop_text+")";
+        document.getElementById('response').innerHTML = "<br><td width='400px' style='word-wrap:break-word;'><div style='width:400px;overflow:auto'>"+"Survey Response: "+feature.properties.Response+"</div></td></br>"
+     }
+    });
+}   
+  }).addTo(map);
+});
+    
+</script>
+</body>
+</html>

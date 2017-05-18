@@ -1,8 +1,8 @@
 <html>
 <head>
   <title>City Sample</title>
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.3/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet/v1.0.3/leaflet.js"></script>
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+   <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
@@ -10,46 +10,48 @@
   <style>
       
       h1 {
-            font-family: 'avenir';
             text-align: center;
+            font-weight: 900;
         }
+      body, html {
+          font-family: sans-serif;
+          margin: 0;
+          padding:0;
+          font-weight: 600;
+      }
+      #temp_buttons {
+          background-color: yellow;
+          height: 135px;
+      }
         #map {
-            width: 800px;
+            width: 600px;
             height: 600px;
             margin: 20px;
             float: left;
         }
        #report {
             float: left;
-            padding-left: 10px;
+            padding-left: 20px;
         }
         h3{
             font-weight: 900;
-            text-decoration: underline; 
-            font-size: 24px;
-            font-family: 'avenir';
+            font-size: 32px;
+            text-transform: uppercase;
         }
       #country,#temp, #religion, #pop {
-            padding: 0;
-            margin: 0;
-            font-family: 'avenir';
             font-size: 20px;
-        }
-      #response {
-            font-family: 'avenir';
-            font-size: 20px;
-        }
-      #temp_buttons {
-          float:auto;
       }
+      #response {
+            font-size: 20px;
+        }
   </style>
 </head>
 <body>
-  <h1>City Sample</h1>
   <div id="temp_buttons">
+       <h1>CITY SAMPLE</h1>
        <!-- <input type="button" class="warm" onClick="this.value=this.value=='Show Warm Cities'?'Hide Warm Cities':'Show Warm Cities'" value="Show Warm Cities">-->
-       <h4>Select Cities with Temperature:</h4>
-       <input type="button" id="mild" class="mild" onClick="filterTemp('Mild')" value="Mild">
+       <h4 style="margin-left:5px;">Select Cities with Temperature:</h4>
+       <input type="button" id="mild" class="mild" onClick="filterTemp('Mild')" value="Mild"style="margin-left:5px;">
        <input type="button" id="warm" class="warm" onClick="filterTemp('Warm')" value="Warm">
        <input type="button" id="cold" class="cold" onClick="filterTemp('Cold')" value="Cold">
        <input type="button" id="vcold" class="vcold" onClick="filterTemp('Very Cold')" value="Very Cold">
@@ -105,9 +107,9 @@
         layer.on({
     click: function populate() {
         document.getElementById('city').innerHTML = feature.properties.City;
-        document.getElementById('country').innerHTML = "Country: " + feature.properties.Country;
+        document.getElementById('country').innerHTML = "Country: " +"<span style='background-color:chartreuse'>"+feature.properties.Country+"</span>";
         document.getElementById('temp').innerHTML = "Temperature: " + "<img src="+feature.properties.Temperature+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.temp_text+")";
-        document.getElementById('religion').innerHTML = "<br>"+"Major Religion: "+feature.properties["major religion"]+"</br>"
+        document.getElementById('religion').innerHTML = "<br>"+"Major Religion: "+"<span style='background-color:yellow'>"+feature.properties["major religion"]+"</span></br>"
         document.getElementById('pop').innerHTML = "Population: " + "<img src="+feature.properties.Population+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.pop_text+")";
         document.getElementById('response').innerHTML = "<br><td width='400px' style='word-wrap:break-word;'><div style='width:400px;overflow:auto'>"+"Survey Response: "+feature.properties.Response+"</div></td></br>"
      }
@@ -134,10 +136,10 @@
       onEachFeature: function(feature, layer) {
         layer.on({
     click: function populate() {
-        document.getElementById('city').innerHTML = feature.properties.City;
-        document.getElementById('country').innerHTML = "Country: " + feature.properties.Country;
+       document.getElementById('city').innerHTML = feature.properties.City;
+        document.getElementById('country').innerHTML = "Country: " +"<span style='background-color:chartreuse'>"+feature.properties.Country+"</span>";
         document.getElementById('temp').innerHTML = "Temperature: " + "<img src="+feature.properties.Temperature+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.temp_text+")";
-        document.getElementById('religion').innerHTML = "<br>"+"Major Religion: "+feature.properties["major religion"]+"</br>"
+        document.getElementById('religion').innerHTML = "<br>"+"Major Religion: "+"<span style='background-color:yellow'>"+feature.properties["major religion"]+"</span></br>"
         document.getElementById('pop').innerHTML = "Population: " + "<img src="+feature.properties.Population+ " style='width:42px;height:42px;'/></a>"+" "+"("+feature.properties.pop_text+")";
         document.getElementById('response').innerHTML = "<br><td width='400px' style='word-wrap:break-word;'><div style='width:400px;overflow:auto'>"+"Survey Response: "+feature.properties.Response+"</div></td></br>"
      }

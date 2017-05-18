@@ -1,0 +1,158 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 78.491684,17.38714 ]
+    },
+    "properties": {
+    "City":"Hyderabad",
+    "Country":"India",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/cqlWHbDt.jpg'",
+    "temp_text":"Mild",
+    "major religion":"HINDU, MUSLIM, CATHOLIC",
+    "Population":"http://i.imgur.com/UNgNpz5t.png'",
+    "pop_text":"Medium"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 139.839478,35.652832 ]
+    },
+    "properties": {
+    "City":"Tokyo",
+    "Country":"Japan",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/r9iGzpWt.png'",
+    "temp_text":"Cold",
+    "major religion":"SHINTO, BUDDHIST",
+    "Population":"http://i.imgur.com/odKwr8lt.jpg'",
+    "pop_text":"Very High"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 37.618423,55.751244 ]
+    },
+    "properties": {
+    "City":"Moscow",
+    "Country":"Russia",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/DW2RV3Ut.png'",
+    "temp_text":"Very Cold",
+    "major religion":"CHRISTIAN, JEWISH",
+    "Population":"http://i.imgur.com/VLF0Eygt.png'",
+    "pop_text":"High"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 114.0683,22.54554 ]
+    },
+    "properties": {
+    "City":"SHENZHEN",
+    "Country":"China",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/WEl57XRt.png'",
+    "temp_text":"Warm",
+    "major religion":"WEIRD, BUDDHIST",
+    "Population":"http://i.imgur.com/VLF0Eygt.png'",
+    "pop_text":"High"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.469722,51.441642 ]
+    },
+    "properties": {
+    "City":"EINDHOVEN",
+    "Country":"Netherlands",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/r9iGzpWt.png'",
+    "temp_text":"Cold",
+    "major religion":"ATHEIST",
+    "Population":"http://i.imgur.com/G8oy5n0t.png'",
+    "pop_text":"Low"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 23.6,46.76667 ]
+    },
+    "properties": {
+    "City":"CLUJ-NAPONCA",
+    "Country":"Romania",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/WEl57XRt.png'",
+    "temp_text":"Warm",
+    "major religion":"CHRISTIAN, ATHEIST",
+    "Population":"http://i.imgur.com/UNgNpz5t.png'",
+    "pop_text":"Medium"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -96.796988,32.776664 ]
+    },
+    "properties": {
+    "City":"DALLAS",
+    "Country":"USA",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/VtsWDTXt.jpg'",
+    "temp_text":"Hot",
+    "major religion":"EVANGELICAL, CHRISTIAN",
+    "Population":"http://i.imgur.com/G8oy5n0t.png'",
+    "pop_text":"Low"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -73.968285,40.785091 ]
+    },
+    "properties": {
+    "City":"NEW YORK",
+    "Country":"USA",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/WEl57XRt.png'",
+    "temp_text":"Warm",
+    "major religion":"ATHEIST, CATHOLIC, JEWISH",
+    "Population":"http://i.imgur.com/VLF0Eygt.png'",
+    "pop_text":"High"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -122.431297,37.773972 ]
+    },
+    "properties": {
+    "City":"SAN FRANCISCO",
+    "Country":"USA",
+    "Response":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "Temperature":"http://i.imgur.com/cqlWHbDt.jpg'",
+    "temp_text":"Mild",
+    "major religion":"TECH",
+    "Population":"http://i.imgur.com/UNgNpz5t.png'",
+    "pop_text":"Medium"
+    }
+  }
+]
+}
